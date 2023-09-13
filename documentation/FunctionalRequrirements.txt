@@ -1,0 +1,20 @@
+User roles:
+
+•	simple customer
+CRUD its collections, wine ratings, tasting notes 
+
+•	Sommelier
+ Simple customer + CRUD wine recommendation + CRUD food & food pairings
+
+•	Winery Owner
+Simple customer + CRUD its winery
+
+•	Organizer
+Simple customer + CRUD its wine events
+
+•	Admin
+CRUD everything
+
+
+User authorization.
+Logging of user actions.
