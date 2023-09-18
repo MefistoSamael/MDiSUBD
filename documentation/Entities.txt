@@ -12,23 +12,23 @@ Wines:
 
 (OTM O_Vintage, Wines)
 Vintage:
-+ Year: integer
++ Year: number(4)
 
 (OTM O_WineType, M_Wines)
 (OTM O_Color, WineType)
-	(OTM O_Sweetness, WineType)
+(OTM O_Sweetness, WineType)
 WineType:
 + Sparkling: bool
 
 (OTM O_Color, WineType)
 Color:
 + Name: varchar
-+ Code: integer(for enum)
++ Id: number(for enum)
 
 (OTM O_Sweetness, WineType)
 Sweetness:
 + Name: varchar
-+ Code: integer(for enum)
++ Id: number(for enum)
 
 
 (OTM O_User, Wineries)
@@ -56,13 +56,13 @@ User:
 (OTM O_Role, User)
 Role:
 + Name: varchar
-+ Code: integer
++ Id: number(*)
 
 
 (OTM O_Wine, WineRating)
 (OTM O_User, WineRating)
 WineRating:
-+ Rating: integer
++ Rating: number(2)
 + Description: varchar(optional)
 
 (OTM O_User,Collection)
