@@ -65,9 +65,9 @@ insert into userorganiserevent values ('4', '1')
 insert into userparticipatorevent values ('1', '1'), ('2', '1'), ('3', '1')
 
 insert into winerating (Rating, description, user_id, wine_id)
-values ('10/10', 'awesome', 1, 1),
-       ('1/10', 'awful', 2, 1),
-       ('0/0', 'err: division by zero', 3, 3)
+values ('10', 'awesome', 1, 1),
+       ('1', 'awful', 2, 2),
+       ('0', 'very awful', 3, 3)
 
 insert into collection (date, note, user_id)
 values ('01-01-2001', 'awesome collection', 1),

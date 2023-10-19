@@ -169,7 +169,7 @@ CREATE TABLE WineEvent (
 CREATE TABLE WineRating (
     rating_id   INTEGER     NOT NULL
                             PRIMARY KEY,
-    Rating      VARCHAR     NOT NULL,
+    Rating      INTEGER     NOT NULL,
     Description TEXT (1000),
     user_id     INTEGER     NOT NULL,
     wine_id     INTEGER     NOT NULL,
