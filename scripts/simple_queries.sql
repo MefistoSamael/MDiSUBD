@@ -75,3 +75,10 @@ CASE
     ELSE collection.date
 end as "creation date" from user left outer join collection on collection.user_id = user.user_id
 
+-- создание вью для пользователя
+
+create view users (username, role) as select user.Username, role.Name from user join role on user.role_id = role.role_id
+
+-- вино и его средний ранг
+select wine.name, AVG(rating.rating) over (partition by wine.wine_id) as "average rating" from wine join winerating on wine.wine_id = rating.wine_id
+
