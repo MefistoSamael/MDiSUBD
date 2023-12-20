@@ -1,72 +1,35 @@
-CREATE TABLE Collection (
-    collection_id INTEGER     NOT NULL
-                              PRIMARY KEY,
-    Date          DATE        NOT NULL,
-    Note          TEXT (1000),
-    user_id       INTEGER     NOT NULL,
-    FOREIGN KEY (
-        user_id
-    )
-    REFERENCES user (user_id) 
-);
-
 CREATE TABLE Color (
-    color_id INTEGER       PRIMARY KEY,
+    id		 SERIAL PRIMARY KEY,
     name     VARCHAR (100) NOT NULL
 );
 
 CREATE TABLE Event (
-    event_id INTEGER       NOT NULL
-                           PRIMARY KEY,
+    id       SERIAL PRIMARY KEY,
     Name     VARCHAR (100) NOT NULL,
     Date     DATE          NOT NULL,
     Location VARCHAR       NOT NULL
 );
 
 CREATE TABLE Food (
-    food_id     INTEGER        NOT NULL
-                               PRIMARY KEY,
+    id     		SERIAL PRIMARY KEY,
     Name        VARCHAR (100)  NOT NULL,
     Photo       VARCHAR,
     description VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE FoodPairing (
-    food_id        INTEGER NOT NULL,
-    pairing_id     INTEGER NOT NULL,
-    PRIMARY KEY(food_id, pairing_id),
-    FOREIGN KEY (
-        food_id
-    )
-    REFERENCES food (food_id),
-    FOREIGN KEY (
-        pairing_id
-    )
-    REFERENCES Pairing (pairing_id) 
-) WITHOUT ROWID;
-
-CREATE TABLE Pairing (
-    pairing_id  INTEGER        NOT NULL
-                               PRIMARY KEY,
-    Description TEXT (1000),
-    wine_id     INTEGER        NOT NULL
-                               REFERENCES Wine (wine_id) 
-);
 
 CREATE TABLE Role (
-    role_id INTEGER       NOT NULL
-                          PRIMARY KEY,
+    id   	SERIAL PRIMARY KEY,
     Name    VARCHAR (100) NOT NULL
 );
 
 CREATE TABLE Sweetness (
-    sweetness_id INTEGER       PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name         VARCHAR (100) NOT NULL
 );
 
-CREATE TABLE User (
-    user_id        INTEGER       NOT NULL
-                                 PRIMARY KEY,
+CREATE TABLE MUser (
+    id			   SERIAL PRIMARY KEY,
     Username       VARCHAR (100) NOT NULL
                                  UNIQUE,
     Email          VARCHAR       NOT NULL,
@@ -78,146 +41,176 @@ CREATE TABLE User (
     FOREIGN KEY (
         role_id
     )
-    REFERENCES role (role_id) 
+    REFERENCES role (id) 
 );
-
-CREATE TABLE UserOrganiserEvent (
-    user_id               INTEGER NOT NULL,
-    event_id              INTEGER NOT NULL,
-    primary key(user_id, event_id),
-    FOREIGN KEY (
-        user_id
-    )
-    REFERENCES user (user_id),
-    FOREIGN KEY (
-        event_id
-    )
-    REFERENCES event (event_id) 
-) without rowid;
-
-CREATE TABLE UserParticipatorEvent (
-    user_id                  INTEGER NOT NULL,
-    event_id                 INTEGER NOT NULL,
-    primary key(user_id, event_id),
-    FOREIGN KEY (
-        user_id
-    )
-    REFERENCES user (user_id),
-    FOREIGN KEY (
-        event_id
-    )
-    REFERENCES event (event_id) 
-)without rowid;
 
 CREATE TABLE Vintage (
-    vintage_id INTEGER    NOT NULL
-                          PRIMARY KEY,
-    Year       NUMBER (4) NOT NULL
-);
-
-CREATE TABLE Wine (
-    wine_id     INTEGER       NOT NULL
-                              PRIMARY KEY,
-    Name        VARCHAR (100),
-    Photo       VARCHAR,
-    Description TEXT (1000),
-    vintage_id  INTEGER       NOT NULL,
-    wineType_id INTEGER       NOT NULL,
-    winery_id   INTEGER       NOT NULL,
-    FOREIGN KEY (
-        vintage_id
-    )
-    REFERENCES vintage (vintage_id),
-    FOREIGN KEY (
-        wineType_id
-    )
-    REFERENCES winetype (wineType_id),
-    FOREIGN KEY (
-        winery_id
-    )
-    REFERENCES winery (winery_id) 
-);
-
-CREATE TABLE WineCollection (
-    wine_id           INTEGER NOT NULL,
-    collection_id     INTEGER NOT NULL,
-    primary key(wine_id, collection_id),
-    FOREIGN KEY (
-        wine_id
-    )
-    REFERENCES wine (wine_id),
-    FOREIGN KEY (
-        collection_id
-    )
-    REFERENCES collection (collection_id) 
-)without rowid;
-
-CREATE TABLE WineEvent (
-    event_id     INTEGER NOT NULL,
-    wine_id      INTEGER NOT NULL,
-    primary key(wine_id, event_id),
-    FOREIGN KEY (
-        event_id
-    )
-    REFERENCES event (event_id),
-    FOREIGN KEY (
-        wine_id
-    )
-    REFERENCES wine (wine_id) 
-)without rowid;
-
-CREATE TABLE WineRating (
-    rating_id   INTEGER     NOT NULL
-                            PRIMARY KEY,
-    Rating      INTEGER     NOT NULL,
-    Description TEXT (1000),
-    user_id     INTEGER     NOT NULL,
-    wine_id     INTEGER     NOT NULL,
-    FOREIGN KEY (
-        user_id
-    )
-    REFERENCES user (user_id),
-    FOREIGN KEY (
-        wine_id
-    )
-    REFERENCES wine (wine_id) 
+    id 		   SERIAL PRIMARY KEY,
+    Year       SMALLINT   NOT NULL
 );
 
 CREATE TABLE Winery (
-    winery_id   INTEGER       NOT NULL
-                              PRIMARY KEY,
+    id   		SERIAL PRIMARY KEY,
     Name        VARCHAR (100) NOT NULL,
-    PhoneNumber VARCHAR,
+    Phonenumber VARCHAR,
     Location    VARCHAR       NOT NULL,
     Region      VARCHAR       NOT NULL
 );
 
-CREATE TABLE WineryUser (
-    user_id       INTEGER NOT NULL,
-    winery_id     INTEGER NOT NULL,
-    primary key(user_id, winery_id),
-    FOREIGN KEY (
-        user_id
-    )
-    REFERENCES user (user_id),
-    FOREIGN KEY (
-        winery_id
-    )
-    REFERENCES Winery (winery_id) 
-)without rowid;
-
 CREATE TABLE WineType (
-    wineType_id  INTEGER NOT NULL
-                         PRIMARY KEY,
+    id  SERIAL PRIMARY KEY,
     sparkling    BOOL    NOT NULL,
     color_id     INTEGER NOT NULL,
     sweetness_id INTEGER NOT NULL,
     FOREIGN KEY (
         color_id
     )
-    REFERENCES Color (color_id),
+    REFERENCES Color (id),
     FOREIGN KEY (
         sweetness_id
     )
-    REFERENCES sweetness (sweetness_id) 
+    REFERENCES sweetness (id) 
+);
+
+CREATE TABLE Wine (
+    id 			SERIAL PRIMARY KEY,
+    Name        VARCHAR (100),
+    Photo       VARCHAR,
+    Description TEXT,
+    vintage_id  INTEGER       NOT NULL,
+    wineType_id INTEGER       NOT NULL,
+    winery_id   INTEGER       NOT NULL,
+    FOREIGN KEY (
+        vintage_id
+    )
+    REFERENCES vintage (id),
+    FOREIGN KEY (
+        wineType_id
+    )
+    REFERENCES winetype (id),
+    FOREIGN KEY (
+        winery_id
+    )
+    REFERENCES winery (id) 
+);
+
+CREATE TABLE Pairing (
+    id  SERIAL PRIMARY KEY,
+    Description TEXT,
+    wine_id     INTEGER        NOT NULL,
+	FOREIGN KEY (
+        wine_id
+    )
+    REFERENCES Wine (id) 
+);
+
+CREATE TABLE FoodPairing (
+    food_id        INTEGER NOT NULL,
+    pairing_id     INTEGER NOT NULL,
+    PRIMARY KEY(food_id, pairing_id),
+    FOREIGN KEY (
+        food_id
+    )
+    REFERENCES food (id),
+    FOREIGN KEY (
+        pairing_id
+    )
+    REFERENCES Pairing (id) 
+);
+
+CREATE TABLE Collection (
+    id 			  SERIAL PRIMARY KEY,
+    Date          DATE        NOT NULL,
+    Note          TEXT,
+    user_id       INTEGER     NOT NULL,
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES MUser (id) 
+);
+
+CREATE TABLE UserOrganiserEvent (
+    user_id               INTEGER NOT NULL,
+    event_id              INTEGER NOT NULL,
+    PRIMARY KEY(user_id, event_id),
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES MUser (id),
+    FOREIGN KEY (
+        event_id
+    )
+    REFERENCES event (id) 
+);
+
+CREATE TABLE UserParticipatorEvent (
+    user_id                  INTEGER NOT NULL,
+    event_id                 INTEGER NOT NULL,
+    PRIMARY KEY(user_id, event_id),
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES MUser (id),
+    FOREIGN KEY (
+        event_id
+    )
+    REFERENCES event (id) 
+);
+
+CREATE TABLE WineCollection (
+    wine_id           INTEGER NOT NULL,
+    collection_id     INTEGER NOT NULL,
+    PRIMARY KEY(wine_id, collection_id),
+    FOREIGN KEY (
+        wine_id
+    )
+    REFERENCES wine (id),
+    FOREIGN KEY (
+        collection_id
+    )
+    REFERENCES collection (id) 
+);
+
+CREATE TABLE WineEvent (
+    event_id     INTEGER NOT NULL,
+    wine_id      INTEGER NOT NULL,
+    PRIMARY KEY(wine_id, event_id),
+    FOREIGN KEY (
+        event_id
+    )
+    REFERENCES event (id),
+    FOREIGN KEY (
+        wine_id
+    )
+    REFERENCES wine (id) 
+);
+
+CREATE TABLE WineRating (
+    id   SERIAL PRIMARY KEY,
+    Rating      INTEGER     NOT NULL,
+    Description TEXT,
+    user_id     INTEGER     NOT NULL,
+    wine_id     INTEGER     NOT NULL,
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES MUser (id),
+    FOREIGN KEY (
+        wine_id
+    )
+    REFERENCES wine (id) 
+);
+
+CREATE TABLE WineryUser (
+    user_id       INTEGER NOT NULL,
+    winery_id     INTEGER NOT NULL,
+    PRIMARY KEY(user_id, winery_id),
+    FOREIGN KEY (
+        user_id
+    )
+    REFERENCES MUser (id),
+    FOREIGN KEY (
+        winery_id
+    )
+    REFERENCES Winery (id) 
 );

@@ -1,10 +1,10 @@
 User roles:
 
 •	simple customer
-CRUD its collections, wine ratings, tasting notes 
+CRUD its collections, wine ratings,
 
 •	Sommelier
- Simple customer + CRUD wine recommendation + CRUD food & food pairings
+ Simple customer + CRUD food & food pairings
 
 •	Winery Owner
 Simple customer + CRUD its winery

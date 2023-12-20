@@ -1,0 +1,24 @@
+User - customer (8) did login
+
+User - admin (12) did login
+
+User - admin (12) did events check
+
+User - admin (12) did events creation
+
+User - admin (12) did events check
+
+User - admin (12) did event check
+
+User - customer (8) did login
+
+User - sommelier (9) did login
+
+User - owner (10) did login
+
+User - owner (10) did apply to new event
+
+User - organizer (11) did login
+
+User - organizer (11) did its events check
+
